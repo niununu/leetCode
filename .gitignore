@@ -1,0 +1,3 @@
+
+build/*
+tests/lib/Catch2/
