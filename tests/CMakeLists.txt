@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_subdirectory(lib/Catch2)
 
 file(GLOB TESTS 
-    SortTest.cpp
+    *.cpp
 )
 add_executable(unit_tests ${TESTS})
 target_link_libraries(unit_tests PRIVATE Catch2::Catch2WithMain)
