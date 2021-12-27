@@ -53,9 +53,4 @@ public:
 
         return result;
     }
-
-    ListNode* numToList(int num)
-    {
-        while(num%10)
-    }
 };
