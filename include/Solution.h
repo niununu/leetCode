@@ -1,6 +1,12 @@
 #include <vector>
 #include <set>
+#include <iostream>
+using namespace std;
 class Solution {
+/*
+面试题 01.01. 判定字符是否唯一
+实现一个算法，确定一个字符串 s 的所有字符是否全都不同。
+*/
 public:
     bool isUnique(std::string astr) {
         bool unique = true;
@@ -72,4 +78,70 @@ public:
     std::string longestPalindrome(std::string s) {
     }
 
+/*
+给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。
+不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+*/
+public:
+    int removeDuplicates(vector<int>& nums) {
+        auto resultSize = nums.size();
+        for (int i = 0; i < resultSize; ++i)
+        {
+            auto base = nums[i];
+            if (i + 1 < resultSize)
+            {
+                auto next = nums[i + 1];
+                if (base == next)
+                {
+                    nums.erase(nums.begin() + i);
+                    -- i;
+                }
+            }
+
+            resultSize = nums.size();
+        }
+
+        return resultSize;
+    }
+/*
+给定一个数组 prices ，其中 prices[i] 是一支给定股票第 i 天的价格。
+设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
+*/
+public:
+    void buyAndSell(int buyIndex, int& profit, vector<int>& prices, int& max)
+    {
+        if (buyIndex > prices.size() - 2)
+        {
+            if (max < profit)
+            {
+                max = profit;
+            }
+            //cout << "okkk: " << profit <<endl;
+            profit = 0;
+            return;
+        }
+        for (int i = buyIndex; i < prices.size(); ++i)
+        {
+            for (int j = i + 1; j < prices.size(); ++j)
+            {
+                if (prices[j] > prices[i])
+                {
+                    //cout << prices[i] << " " << prices[j] << endl;
+                    profit += prices[j] - prices[i];
+                    buyAndSell(j + 1, profit, prices, max);
+                }
+            }
+        }
+    }
+
+    int maxProfit(vector<int>& prices) {
+        int max = 0;
+        for (int i = 0; i < prices.size() - 1; ++i)
+        {
+            int profit = 0;
+            buyAndSell(i, profit, prices, max);
+        }
+
+        return max;
+    }
 };
