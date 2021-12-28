@@ -108,40 +108,65 @@ public:
 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
 */
 public:
-    void buyAndSell(int buyIndex, int& profit, vector<int>& prices, int& max)
+    int max(int num1, int num2)
     {
-        if (buyIndex > prices.size() - 2)
-        {
-            if (max < profit)
-            {
-                max = profit;
-            }
-            //cout << "okkk: " << profit <<endl;
-            profit = 0;
-            return;
-        }
-        for (int i = buyIndex; i < prices.size(); ++i)
-        {
-            for (int j = i + 1; j < prices.size(); ++j)
-            {
-                if (prices[j] > prices[i])
-                {
-                    //cout << prices[i] << " " << prices[j] << endl;
-                    profit += prices[j] - prices[i];
-                    buyAndSell(j + 1, profit, prices, max);
-                }
-            }
-        }
+        return num1 > num2 ? num1 : num2;
     }
 
     int maxProfit(vector<int>& prices) {
-        int max = 0;
-        for (int i = 0; i < prices.size() - 1; ++i)
+        int length = prices.size();
+        if (length < 2)
         {
-            int profit = 0;
-            buyAndSell(i, profit, prices, max);
+            return 0;
         }
 
+        int dp[length][2];
+        dp[0][1] = 0 - prices[0];
+        dp[0][0] = 0;
+        for (int i = 1; i < length; ++i)
+        {
+            dp[i][1] = max(dp[i - 1][0] - prices[i], dp[i - 1][1]);
+            dp[i][0] = max(dp[i - 1][1] + prices[i], dp[i - 1][0]);
+        }
+
+        int max = dp[length - 1][0];
         return max;
     }
-};
+
+/*
+旋转数组
+给你一个数组，将数组中的元素向右轮转 k 个位置，其中 k 是非负数。
+*/
+ void rotate(vector<int>& nums, int k) {
+    int tail = nums.size();
+    if (k > tail)
+    {
+        k = k%tail;
+    }
+    tail = tail - k;
+    std::vector<int> v1;
+    v1.insert(v1.end(), nums.begin() + tail, nums.end());
+    v1.insert(v1.end(), nums.begin(), nums.begin() + tail);
+    nums = v1;
+ }
+
+/*
+存在重复元素
+给定一个整数数组，判断是否存在重复元素。
+如果存在一值在数组中出现至少两次，函数返回 true 。如果数组中每个元素都不相同，则返回 false 
+*/
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        set<int> setA;
+        for(const auto& num : nums)
+        {
+            auto ret = setA.insert(num);
+            if (!ret.second)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+};// class Solution

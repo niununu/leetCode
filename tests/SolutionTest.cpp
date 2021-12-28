@@ -128,5 +128,77 @@ TEST_CASE("maxProfit", "[maxProfit]")
         prices = {1, 7};
         expectResult = 6;
     }
+    SECTION("8")
+    {
+        prices = {6,1,3,2,4,7};
+        expectResult = 7;
+    }
     REQUIRE(so.maxProfit(prices) == expectResult);
+}
+
+TEST_CASE("rotate", "[rotate]")
+{
+    Solution so;
+    std::vector<int> input;
+    std::vector<int> output;
+    int k = 0;
+    SECTION("1")
+    {
+        input = {1,2,3,4,5,6,7};
+        output = {5,6,7,1,2,3,4};
+        k = 3;
+    }
+    SECTION("2")
+    {
+        input = {-1,-100,3,99};
+        output = {3,99,-1,-100};
+        k = 2;
+    }
+    SECTION("3")
+    {
+        input = {-1,-100,3,99};
+        output = {-1,-100,3,99};
+        k = 0;
+    }
+    SECTION("4")
+    {
+        input = {1,2,3,4,5,6,7};
+        output = {1,2,3,4,5,6,7};
+        k = 7;
+    }
+    SECTION("5")
+    {
+        input = {1,2,3,4,5,6,7};
+        output = {7,1,2,3,4,5,6};
+        k = 8;
+    }
+    SECTION("5")
+    {
+        input = {1,2,3,4};
+        output = {1,2,3,4};
+        k = 8;
+    }
+    SECTION("5")
+    {
+        input = {1,2,3,4};
+        output = {4,1,2,3};
+        k = 9;
+    }
+    so.rotate(input, k);
+    REQUIRE(isSameVector(input, output));
+}
+
+TEST_CASE("containsDuplicate", "[containsDuplicate]")
+{
+    Solution so;
+    vector<int> input;
+    REQUIRE(so.containsDuplicate(input) == false);
+    input = {1};
+    REQUIRE(so.containsDuplicate(input) == false);
+    input = {1,2,3,1};
+    REQUIRE(so.containsDuplicate(input) == true);
+    input = {1,2,3,4};
+    REQUIRE(so.containsDuplicate(input) == false);
+    input = {1,1,1,3,3,4,3,2,4,2};
+    REQUIRE(so.containsDuplicate(input) == true);
 }
