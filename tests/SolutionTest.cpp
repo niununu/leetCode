@@ -202,3 +202,31 @@ TEST_CASE("containsDuplicate", "[containsDuplicate]")
     input = {1,1,1,3,3,4,3,2,4,2};
     REQUIRE(so.containsDuplicate(input) == true);
 }
+
+TEST_CASE("singleNumber", "[singleNumber]")
+{
+    Solution so;
+    vector<int> input;
+    int result = 0;
+    SECTION("1")
+    {
+        input = {2,2,1};
+        result = 1;
+    }
+    SECTION("2")
+    {
+        input = {4,1,2,1,2};
+        result = 4;
+    }
+    REQUIRE(so.singleNumber(input) == result);
+}
+
+TEST_CASE("intersect", "[intersect]")
+{
+    Solution so;
+    vector<int> nums1;
+    vector<int> nums2;
+    vector<int> output;
+    nums1 = [1,2,2,1], nums2 = [2,2]
+输出：[2,2]
+}

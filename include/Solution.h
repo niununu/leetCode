@@ -120,7 +120,7 @@ public:
             return 0;
         }
 
-        int dp[length][2];
+        auto dp = new int[length][2];
         dp[0][1] = 0 - prices[0];
         dp[0][0] = 0;
         for (int i = 1; i < length; ++i)
@@ -168,5 +168,54 @@ public:
         }
 
         return false;
+    }
+/*
+只出现一次的数字
+给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+*/
+public:
+    int singleNumber(vector<int>& nums) {
+        int result = 0;
+        for (const auto& num : nums)
+        {
+            result = num ^ result;
+        }
+        return result;
+    }
+
+/*
+    两个数组的交集 II
+    给你两个整数数组 nums1 和 nums2 ，请你以数组形式返回两数组的交集。返回结果中每个元素出现的次数，应与元素在两个数组中都出现的次数一致（如果出现次数不一致，则考虑取较小值）。可以不考虑输出结果的顺序。
+*/
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        std::vector<int> result;
+        std::map<int, int> map;
+        for (const auto& num1 : nums1)
+        {
+            auto iter = map.find(num1);
+            if (iter != map.end())
+            {
+                ++ map[num1];
+            }
+            else
+            {
+                map[num1] = 1;
+            }
+        }
+
+        for (const auto& num2 : nums2)
+        {
+            auto iter = map.find(num2);
+            if (iter != map.end())
+            {
+                if (map[num2] > 0)
+                {
+                    result.emplace_back(num2);
+                }
+                -- map[num2];
+            }
+        }
+        return result;
     }
 };// class Solution
