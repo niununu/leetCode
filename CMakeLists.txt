@@ -17,8 +17,8 @@ add_subdirectory("tests")
 
 # puts all .cpp files inside src to the SOURCES variable
 file(GLOB SOURCES 
-    src/*.cpp
     include/*.h
+    include/main.cpp
 )
 
 add_library(unit_test_lib ${SOURCES})
