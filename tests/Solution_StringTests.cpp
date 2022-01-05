@@ -9,9 +9,6 @@
          so = Solution();
      }
      Solution so;
-//     std::vector<int> input;
-//     std::vector<int> input2;
-//     std::vector<int> output;
      int expectResult{ 0 };
  }; // class SolutionTestsFixture
 
@@ -200,4 +197,28 @@ TEST_CASE_METHOD(SolutionStringTestsFixture, "myAtoi", "[myAtoi]""[Solution_Stri
         result = 2147483646;
     }
     REQUIRE(so.myAtoi(input) == result);
+}
+
+TEST_CASE_METHOD(SolutionStringTestsFixture, "longestCommonPrefix", "[longestCommonPrefix]""[Solution_StringTests]")
+{
+    vector<string> input;
+    string result;
+    SECTION("1")
+    {
+        input = {"flower","flow","flight"};
+        result = "fl";
+    }
+
+    SECTION("2")
+    {
+        input = {"dog","racecar","car"};
+        result = "";
+    }
+
+    SECTION("3")
+    {
+        input = {"d","dd","ddd"};
+        result = "d";
+    }
+    REQUIRE(so.longestCommonPrefix(input) == result);
 }

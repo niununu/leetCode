@@ -240,4 +240,34 @@ public:
 
         return result;
     }
+
+/*
+最长公共前缀
+编写一个函数来查找字符串数组中的最长公共前缀。
+如果不存在公共前缀，返回空字符串 ""。
+*/
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        if (strs.empty())
+        {
+            return "";
+        }
+        string result = "";
+        auto firstStr = strs[0];
+        for (int i = 0; i < (int)firstStr.size(); ++i)
+        {
+            auto ch = firstStr[i];
+            bool isSame = false;
+            for (int j = 1; j < (int)strs.size(); ++j)
+            {
+                if (i >= strs[j].size() || ch != strs[j][i])
+                {
+                    return result;
+                }
+            }
+            result.push_back(ch);
+        }
+
+        return result;
+    } // longestCommonPrefix
 }; // class Solution 
