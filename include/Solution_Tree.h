@@ -32,5 +32,13 @@ public:
 */
     int maxDepth(TreeNode *root)
     {
+        if (!root)
+        {
+            return 0;
+        }
+        auto leftDep = maxDepth(root->left);
+        auto rightDep = maxDepth(root->right);
+        auto max = leftDep > rightDep ? leftDep : rightDep;
+        return max + 1;
     }
 }; // class Solution
