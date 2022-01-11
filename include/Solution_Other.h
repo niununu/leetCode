@@ -15,7 +15,6 @@ public:
         int result = 0;
         while(n >= 1)
         {
-            cout << bitset<32>(n) << ", "<< bitset<32>(n & 1) << endl;
             if (n & 1)
             {
                 result++;
@@ -49,17 +48,72 @@ public:
 */
 public:
     uint32_t reverseBits(uint32_t n) {
-        uint32_t result = 0;
-        while(n != 0)
+        if (n == 0)
         {
-            result = result << 1;
-            if (!(n ^ 1))
+            return 0;
+        }
+        uint32_t result = 0;
+        bool find = false;
+        int count = 32;
+        while(count > 0 && n != 0)
+        {
+            count--;
+            if (find)
             {
+                result = result << 1;
+            }
+
+            if (n & 1)
+            {
+                if (!find)
+                {
+                    find = true;
+                }
+
                 result ++;
             }
             n = n >> 1;
         }
 
+        while (count > 0)
+        {
+            result = result << 1;
+            count --;
+        }
         return result;
     } // reverseBits
+/*
+杨辉三角
+给定一个非负整数 numRows，生成「杨辉三角」的前 numRows 行。
+在「杨辉三角」中，每个数是它左上方和右上方的数的和。
+*/
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> result;
+        for (int i = 0; i < numRows; ++i)
+        {
+            if (i == 0)
+            {
+                result.push_back({ 1 });
+                continue;
+            }
+
+            vector<int> row;
+            row.resize(i + 1);
+            auto preVec = result[i - 1];
+            for (int j = 0; j < i + 1; ++j)
+            {
+                if (j == 0 || j == i)
+                {
+                    row[j] = 1;
+                }
+                else
+                {
+                    row[j] = preVec[j] + preVec[j - 1];
+                }
+            }
+            result.push_back(row);
+        }
+
+        return result;
+    }
 };

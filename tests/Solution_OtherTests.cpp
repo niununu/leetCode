@@ -79,7 +79,57 @@ TEST_CASE_METHOD(SolutionOtherTestsFixture, "hammingDistance", "[hammingDistance
 
 TEST_CASE_METHOD(SolutionOtherTestsFixture, "reverseBits", "[reverseBits]""[Solution_OtherTests]")
 {
-    input = 0b00000010100101000001111010011100;
-    output = 0b00111001011110000010100101000000;
+    SECTION("")
+    {
+        input = 0b00000010100101000001111010011100;
+        output = 0b00111001011110000010100101000000;
+    }
+    SECTION("")
+    {
+        input = 0b11111111111111111111111111111101;
+        output = 0b10111111111111111111111111111111;
+    }
+    SECTION("")
+    {
+        input = 0b11111111111111111111111111111111;
+        output = 0b11111111111111111111111111111111;
+    }
+    SECTION("")
+    {
+        input = 0b10000000000000000000000000000000;
+        output = 1;
+    }
+    SECTION("")
+    {
+        input = 0;
+        output = 0;
+    }
     REQUIRE(so.reverseBits(input) == output);
+}
+
+TEST_CASE_METHOD(SolutionOtherTestsFixture, "generate", "[generate]""[Solution_OtherTests]")
+{
+	vector<vector<int>> output;
+
+    SECTION("")
+    {
+        input1 = 5;
+        output = {{1},{1,1},{1,2,1},{1,3,3,1},{1,4,6,4,1}};
+    }
+    SECTION("")
+    {
+        input1 = 1;
+        output = {{1}};
+    }
+    SECTION("")
+    {
+        input1 = 2;
+        output = {{1},{1,1}};
+    }
+    auto result = so.generate(input1);
+    REQUIRE(result.size() == output.size());
+    for (int i = 0; i < input1; ++i)
+    {
+        REQUIRE(SolutionTestUtil::isSameVector(output[i], result[i]));
+    }
 }
