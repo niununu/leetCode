@@ -116,4 +116,88 @@ public:
 
         return result;
     }
+/*
+有效的括号
+给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
+有效字符串需满足：
+左括号必须用相同类型的右括号闭合。
+左括号必须以正确的顺序闭合。
+*/
+public:
+    bool isValid(string s) {
+        std::vector<char> vec;
+        for (int i = 0; i < s.length(); ++i)
+        {
+            auto ch = s[i];
+            if (ch == '(' || ch == '{' || ch == '[')
+            {
+                vec.push_back(ch);
+            }
+            else
+            {
+                if (vec.empty())
+                {
+                    return false;
+                }
+                auto tailCh = vec.back();
+                vec.pop_back();
+                switch (ch)
+                {
+                    case ')':
+                    {
+                        if (tailCh != '(')
+                        {
+                            return false;
+                        }
+                        break;
+
+                    }
+
+                    case '}':
+                    {
+                        if (tailCh != '{')
+                        {
+                            return false;
+                        }
+                        break;
+                    }
+
+                    case ']':
+                    {
+                        if (tailCh != '[')
+                        {
+                            return false;
+                        }
+                        break;
+                    }
+
+                    default:
+                        break;
+                }
+            }
+        }
+
+        if (!vec.empty())
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    } // isValid
+/*
+缺失数字
+给定一个包含 [0, n] 中 n 个数的数组 nums ，找出 [0, n] 这个范围内没有出现在数组中的那个数。
+*/
+    int missingNumber(vector<int>& nums) {
+        int size = (int)nums.size();
+        int total = 0;
+        for (const auto& num : nums)
+        {
+            total += num;
+        }
+
+        return size*(size + 1)/2 - total;
+    }
 };

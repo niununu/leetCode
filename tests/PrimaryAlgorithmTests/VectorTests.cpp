@@ -1,11 +1,11 @@
 #include <catch2/catch_test_macros.hpp>
-#include "../include/Solution_Vector.h"
+#include "../include/PrimaryAlgorithm/Vector.h"
 #include <algorithm>
 
-class SolutionTestsFixture
+class StringTestsFixture
 {
 public:
-    SolutionTestsFixture()
+    StringTestsFixture()
     {
         so = Solution();
     }
@@ -14,7 +14,7 @@ public:
     std::vector<int> input2;
     std::vector<int> output;
     int expectResult{ 0 };
-}; // class SolutionTestsFixture
+}; // class StringTestsFixture
 
 
 template <class T>
@@ -60,7 +60,7 @@ bool isSameVector(std::vector<T> vec1, std::vector<T> vec2)
     return isSame;
 }
 
-TEST_CASE_METHOD(SolutionTestsFixture, "removeDuplicates", "[removeDuplicates]""[Solution_VectorTests]")
+TEST_CASE_METHOD(StringTestsFixture, "removeDuplicates", "[removeDuplicates]""[VectorTests]")
 {
     SECTION("1")
     {
@@ -92,10 +92,10 @@ TEST_CASE_METHOD(SolutionTestsFixture, "removeDuplicates", "[removeDuplicates]""
         output = {1};
     }
     REQUIRE(so.removeDuplicates(input) == output.size());
-    REQUIRE(isSameVector(input, output));
+    //REQUIRE(StringTestsFixture(input, output));
 }
 
-TEST_CASE_METHOD(SolutionTestsFixture, "maxProfit", "[maxProfit]""[Solution_VectorTests]")
+TEST_CASE_METHOD(StringTestsFixture, "maxProfit", "[maxProfit]""[VectorTests]")
 {
     SECTION("1")
     {
@@ -142,7 +142,7 @@ TEST_CASE_METHOD(SolutionTestsFixture, "maxProfit", "[maxProfit]""[Solution_Vect
     REQUIRE(so.maxProfit(input) == expectResult);
 }
 
-TEST_CASE_METHOD(SolutionTestsFixture, "rotate", "[rotate]""[Solution_VectorTests]")
+TEST_CASE_METHOD(StringTestsFixture, "rotate", "[rotate]""[VectorTests]")
 {
     int k = 0;
     SECTION("1")
@@ -191,7 +191,7 @@ TEST_CASE_METHOD(SolutionTestsFixture, "rotate", "[rotate]""[Solution_VectorTest
     REQUIRE(isSameVector(input, output));
 }
 
-TEST_CASE_METHOD(SolutionTestsFixture, "containsDuplicate", "[containsDuplicate]""[Solution_VectorTests]")
+TEST_CASE_METHOD(StringTestsFixture, "containsDuplicate", "[containsDuplicate]""[VectorTests]")
 {
     REQUIRE(so.containsDuplicate(input) == false);
     input = {1};
@@ -204,7 +204,7 @@ TEST_CASE_METHOD(SolutionTestsFixture, "containsDuplicate", "[containsDuplicate]
     REQUIRE(so.containsDuplicate(input) == true);
 }
 
-TEST_CASE_METHOD(SolutionTestsFixture, "singleNumber", "[singleNumber]""[Solution_VectorTests]")
+TEST_CASE_METHOD(StringTestsFixture, "singleNumber", "[singleNumber]""[VectorTests]")
 {
     SECTION("1")
     {
@@ -219,7 +219,7 @@ TEST_CASE_METHOD(SolutionTestsFixture, "singleNumber", "[singleNumber]""[Solutio
     REQUIRE(so.singleNumber(input) == expectResult);
 }
 
-TEST_CASE_METHOD(SolutionTestsFixture, "intersect", "[intersect]""[Solution_VectorTests]")
+TEST_CASE_METHOD(StringTestsFixture, "intersect", "[intersect]""[VectorTests]")
 {
     SECTION("1")
     {
@@ -262,7 +262,7 @@ TEST_CASE_METHOD(SolutionTestsFixture, "intersect", "[intersect]""[Solution_Vect
     REQUIRE(isSameVector(result, output));
 }
 
-TEST_CASE_METHOD(SolutionTestsFixture, "plusOne", "[plusOne]""[Solution_VectorTests]")
+TEST_CASE_METHOD(StringTestsFixture, "plusOne", "[plusOne]""[VectorTests]")
 {
     SECTION("1")
     {
@@ -297,7 +297,7 @@ TEST_CASE_METHOD(SolutionTestsFixture, "plusOne", "[plusOne]""[Solution_VectorTe
     REQUIRE(isSameVector(so.plusOne(input), output));
 }
 
-TEST_CASE_METHOD(SolutionTestsFixture, "moveZeroes", "[moveZeroes]""[Solution_VectorTests]")
+TEST_CASE_METHOD(StringTestsFixture, "moveZeroes", "[moveZeroes]""[VectorTests]")
 {
     SECTION("1")
     {

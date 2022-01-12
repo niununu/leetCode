@@ -1,11 +1,11 @@
 #include <catch2/catch_test_macros.hpp>
-#include "../include/Solution_Other.h"
-#include "SolutionTestUtil.h"
+#include "../include/PrimaryAlgorithm/Other.h"
+#include "../TestUtils.h"
 
-class SolutionOtherTestsFixture
+class OtherTestsFixture
 {
 public:
-    SolutionOtherTestsFixture()
+    OtherTestsFixture()
     {
         so = Solution();
     }
@@ -15,15 +15,15 @@ public:
     int output{0};
     uint32_t input{0};
 
-    // std::vector<int> input;
+    std::vector<int> intVec;
     // std::vector<int> input2;
     // std::vector<int> output;
     // int index = 0;
     // bool outputBool = false;
 
-}; // class SolutionOtherTestsFixture
+}; // class OtherTestsFixture
 
-TEST_CASE_METHOD(SolutionOtherTestsFixture, "hammingWeight", "[hammingWeight]""[Solution_OtherTests]")
+TEST_CASE_METHOD(OtherTestsFixture, "hammingWeight", "[hammingWeight]""[OtherTests]")
 {
     SECTION("")
     {
@@ -53,7 +53,7 @@ TEST_CASE_METHOD(SolutionOtherTestsFixture, "hammingWeight", "[hammingWeight]""[
     REQUIRE(so.hammingWeight(input) == output);
 }
 
-TEST_CASE_METHOD(SolutionOtherTestsFixture, "hammingDistance", "[hammingDistance]""[Solution_OtherTests]")
+TEST_CASE_METHOD(OtherTestsFixture, "hammingDistance", "[hammingDistance]""[OtherTests]")
 {
     SECTION("")
     {
@@ -77,7 +77,7 @@ TEST_CASE_METHOD(SolutionOtherTestsFixture, "hammingDistance", "[hammingDistance
 
 }
 
-TEST_CASE_METHOD(SolutionOtherTestsFixture, "reverseBits", "[reverseBits]""[Solution_OtherTests]")
+TEST_CASE_METHOD(OtherTestsFixture, "reverseBits", "[reverseBits]""[OtherTests]")
 {
     SECTION("")
     {
@@ -107,9 +107,9 @@ TEST_CASE_METHOD(SolutionOtherTestsFixture, "reverseBits", "[reverseBits]""[Solu
     REQUIRE(so.reverseBits(input) == output);
 }
 
-TEST_CASE_METHOD(SolutionOtherTestsFixture, "generate", "[generate]""[Solution_OtherTests]")
+TEST_CASE_METHOD(OtherTestsFixture, "generate", "[generate]""[OtherTests]")
 {
-	vector<vector<int>> output;
+    vector<vector<int>> output;
 
     SECTION("")
     {
@@ -132,4 +132,74 @@ TEST_CASE_METHOD(SolutionOtherTestsFixture, "generate", "[generate]""[Solution_O
     {
         REQUIRE(SolutionTestUtil::isSameVector(output[i], result[i]));
     }
+}
+
+TEST_CASE_METHOD(OtherTestsFixture, "isValid", "[isValid]""[OtherTests]")
+{
+    std::string inputStr;
+    bool result = true;
+    SECTION("")
+    {
+        inputStr = "()";
+        result = true;
+    }
+
+    SECTION("")
+    {
+        inputStr = "()[]{}";
+        result = true;
+    }
+    SECTION("")
+    {
+        inputStr = "(]";
+        result = false;
+    }
+    SECTION("")
+    {
+        inputStr = "([)]";
+        result = false;
+    }
+    SECTION("")
+    {
+        inputStr = "{[]}";
+        result = true;
+    }
+    SECTION("")
+    {
+        inputStr = "{";
+        result = false;
+    }
+    SECTION("")
+    {
+        inputStr = "}";
+        result = false;
+    }
+    REQUIRE(so.isValid(inputStr) == result);
+}
+
+TEST_CASE_METHOD(OtherTestsFixture, "missingNumber", "[missingNumber]""[OtherTests]")
+{
+    int result = 0;
+    SECTION("")
+    {
+        intVec = {3,0,1};
+        result = 2;
+    }
+
+    SECTION("1")
+    {
+        intVec = {0,1};
+        result = 2;
+    }
+    SECTION("2")
+    {
+        intVec = {9,6,4,2,3,5,7,0,1};
+        result = 8;
+    }
+    SECTION("3")
+    {
+        intVec = {0};
+        result = 1;
+    }
+    REQUIRE(so.missingNumber(intVec) == result);
 }

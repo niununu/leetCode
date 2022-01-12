@@ -1,18 +1,18 @@
 #include <catch2/catch_test_macros.hpp>
-#include "../include/Solution_String.h"
-#include "SolutionTestUtil.h"
- class SolutionStringTestsFixture
+#include "../include/PrimaryAlgorithm/String.h"
+#include "../TestUtils.h"
+ class StringTestsFixture
  {
  public:
-     SolutionStringTestsFixture()
+     StringTestsFixture()
      {
          so = Solution();
      }
      Solution so;
      int expectResult{ 0 };
- }; // class SolutionTestsFixture
+ }; // class StringTestsFixture
 
-TEST_CASE_METHOD(SolutionStringTestsFixture, "reverseString", "[reverseString]""[Solution_StringTests]")
+TEST_CASE_METHOD(StringTestsFixture, "reverseString", "[reverseString]""[StringTests]")
 {
     std::vector<char> input;
     std::vector<char> output;
@@ -41,7 +41,7 @@ TEST_CASE_METHOD(SolutionStringTestsFixture, "reverseString", "[reverseString]""
     REQUIRE(SolutionTestUtil::isSameVector(input, output));
 }
 
-TEST_CASE_METHOD(SolutionStringTestsFixture, "reverse", "[reverse]""[Solution_StringTests]")
+TEST_CASE_METHOD(StringTestsFixture, "reverse", "[reverse]""[StringTests]")
 {
     int input = 0;
     int output = 0;
@@ -76,7 +76,7 @@ TEST_CASE_METHOD(SolutionStringTestsFixture, "reverse", "[reverse]""[Solution_St
     REQUIRE(so.reverse(input) == output);
 }
 
-TEST_CASE_METHOD(SolutionStringTestsFixture, "firstUniqChar", "[firstUniqChar]""[Solution_StringTests]")
+TEST_CASE_METHOD(StringTestsFixture, "firstUniqChar", "[firstUniqChar]""[StringTests]")
 {
     std::string input;
     int output;
@@ -98,7 +98,7 @@ TEST_CASE_METHOD(SolutionStringTestsFixture, "firstUniqChar", "[firstUniqChar]""
     REQUIRE(so.firstUniqChar(input) == output);
 }
 
-TEST_CASE_METHOD(SolutionStringTestsFixture, "isAnagram", "[isAnagram]""[Solution_StringTests]")
+TEST_CASE_METHOD(StringTestsFixture, "isAnagram", "[isAnagram]""[StringTests]")
 {
     std::string input1;
     std::string input2;
@@ -123,7 +123,7 @@ TEST_CASE_METHOD(SolutionStringTestsFixture, "isAnagram", "[isAnagram]""[Solutio
     }    REQUIRE(so.isAnagram(input1, input2) == output);
 }
 
-TEST_CASE_METHOD(SolutionStringTestsFixture, "isPalindrome", "[isPalindrome]""[Solution_StringTests]")
+TEST_CASE_METHOD(StringTestsFixture, "isPalindrome", "[isPalindrome]""[StringTests]")
 {
     string input = "";
     bool result = false;
@@ -150,7 +150,7 @@ TEST_CASE_METHOD(SolutionStringTestsFixture, "isPalindrome", "[isPalindrome]""[S
     REQUIRE(so.isPalindrome(input) == result);
 }
 
-TEST_CASE_METHOD(SolutionStringTestsFixture, "myAtoi", "[myAtoi]""[Solution_StringTests]")
+TEST_CASE_METHOD(StringTestsFixture, "myAtoi", "[myAtoi]""[StringTests]")
 {
     string input = "";
     int result = 0;
@@ -199,7 +199,7 @@ TEST_CASE_METHOD(SolutionStringTestsFixture, "myAtoi", "[myAtoi]""[Solution_Stri
     REQUIRE(so.myAtoi(input) == result);
 }
 
-TEST_CASE_METHOD(SolutionStringTestsFixture, "longestCommonPrefix", "[longestCommonPrefix]""[Solution_StringTests]")
+TEST_CASE_METHOD(StringTestsFixture, "longestCommonPrefix", "[longestCommonPrefix]""[StringTests]")
 {
     vector<string> input;
     string result;

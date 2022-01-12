@@ -1,13 +1,13 @@
 #include <catch2/catch_test_macros.hpp>
-#include "../include/Solution_Chain.h"
-#include "SolutionTestUtil.h"
+#include "../include/PrimaryAlgorithm/Chain.h"
+#include "../TestUtils.h"
 
 using ListNode = Solution::ListNode;
 
-class SolutionChainTestsFixture
+class ChainTestsFixture
 {
 public:
-    SolutionChainTestsFixture()
+    ChainTestsFixture()
     {
         so = Solution();
     }
@@ -19,10 +19,9 @@ public:
     int index = 0;
     bool outputBool = false;
 
-}; // class SolutionChainTestsFixture
+}; // class ChainTestsFixture
 
-TEST_CASE_METHOD(SolutionChainTestsFixture, "removeNthFromEnd", "[removeNthFromEnd]"
-                                                                "[Solution_ChainTests]")
+TEST_CASE_METHOD(ChainTestsFixture, "removeNthFromEnd", "[removeNthFromEnd]""[ChainTests]")
 {
     SECTION("1")
     {
@@ -61,8 +60,8 @@ TEST_CASE_METHOD(SolutionChainTestsFixture, "removeNthFromEnd", "[removeNthFromE
     REQUIRE(SolutionTestUtil::isSameVector(so.printChain(result), output));
 }
 
-TEST_CASE_METHOD(SolutionChainTestsFixture, "reverseList", "[reverseList]"
-                                                           "[Solution_ChainTests]")
+TEST_CASE_METHOD(ChainTestsFixture, "reverseList", "[reverseList]"
+                                                           "[ChainTests]")
 {
     SECTION("1")
     {
@@ -89,8 +88,8 @@ TEST_CASE_METHOD(SolutionChainTestsFixture, "reverseList", "[reverseList]"
     REQUIRE(SolutionTestUtil::isSameVector(output, so.printChain(result)));
 }
 
-TEST_CASE_METHOD(SolutionChainTestsFixture, "mergeTwoLists", "[mergeTwoLists]"
-                                                             "[Solution_ChainTests]")
+TEST_CASE_METHOD(ChainTestsFixture, "mergeTwoLists", "[mergeTwoLists]"
+                                                             "[ChainTests]")
 {
     SECTION("")
     {
@@ -146,8 +145,8 @@ TEST_CASE_METHOD(SolutionChainTestsFixture, "mergeTwoLists", "[mergeTwoLists]"
     REQUIRE(SolutionTestUtil::isSameVector(output, so.printChain(result)));
 }
 
-TEST_CASE_METHOD(SolutionChainTestsFixture, "isPalindrome", "[isPalindrome]"
-                                                            "[Solution_ChainTests]")
+TEST_CASE_METHOD(ChainTestsFixture, "isPalindrome", "[isPalindrome]"
+                                                            "[ChainTests]")
 {
     SECTION("")
     {

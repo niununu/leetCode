@@ -2,26 +2,15 @@
 
 cmake_minimum_required(VERSION 3.10) 
 
-# project name and version
-project(leetCode VERSION 1.0) 
-
-include_directories(include)
-
-#aux_source_directory(src DIR_SRCS)
-
-
-
 # specify the C++ standard 
 set(CMAKE_CXX_STANDARD 11) 
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+add_subdirectory("PrimaryAlgorithm")
 
-add_subdirectory("tests")
-add_subdirectory("include")
 # puts all .cpp files inside src to the SOURCES variable
-#file(GLOB SOURCES 
-#    include/PrimaryAlgorithm/*.h
-#    include/main.cpp
-#)
+file(GLOB SOURCES 
+    PrimaryAlgorithm/*.h
+)
 
 #add_library(PrimaryAlgorithmTestsLib ${SOURCES})
 #set_property(TARGET PrimaryAlgorithmTestsLib PROPERTY FOLDER Src)

@@ -1,11 +1,11 @@
 #include <catch2/catch_test_macros.hpp>
-#include "../include/Solution_SortAndSearch.h"
-#include "SolutionTestUtil.h"
+#include "../include/PrimaryAlgorithm/SortAndSearch.h"
+#include "../TestUtils.h"
 
-class SolutionSortAndSearchTestsFixture
+class SortAndSearchTestsFixture
 {
 public:
-    SolutionSortAndSearchTestsFixture()
+    SortAndSearchTestsFixture()
     {
         so = Solution();
     }
@@ -13,9 +13,9 @@ public:
     std::vector<int> input;
     std::vector<int> input2;
     std::vector<int> output;
-}; // class SolutionSortAndSearchTestsFixture
+}; // class SortAndSearchTestsFixture
 
-TEST_CASE_METHOD(SolutionSortAndSearchTestsFixture, "merge", "[merge]""[Solution_SortAndSearchTests]")
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "merge", "[merge]""[SortAndSearchTests]""[testlab]")
 {
     int m = 3, n = 3;
     SECTION("")
@@ -57,7 +57,7 @@ TEST_CASE_METHOD(SolutionSortAndSearchTestsFixture, "merge", "[merge]""[Solution
     REQUIRE(SolutionTestUtil::isSameVector(input, output));
 }
 
-TEST_CASE_METHOD(SolutionSortAndSearchTestsFixture, "firstBadVersion", "[firstBadVersion]""[Solution_SortAndSearchTests]")
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "firstBadVersion", "[firstBadVersion]""[SortAndSearchTests]")
 {
     so.expectVersion = 4;
     int inputInt = 5;
