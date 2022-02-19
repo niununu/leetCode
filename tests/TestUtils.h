@@ -9,7 +9,7 @@ public:
         {
             std::cout << item << " ";
         }
-        std::cout << endl;
+        std::cout << std::endl;
     }
 
     template <class T>
