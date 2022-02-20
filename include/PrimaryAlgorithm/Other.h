@@ -201,3 +201,37 @@ public:
         return size*(size + 1)/2 - total;
     }
 };
+
+class CQueue {
+public:
+    CQueue() {
+
+    }
+    
+    void appendTail(int value) {
+        vec1.push_back(value);
+    }
+    
+    int deleteHead() {
+        int result = -1;
+        if (vec2.empty())
+        {
+            while(!vec1.empty())
+            {
+                vec2.push_back(vec1.back());
+                vec1.pop_back();
+            }
+        }
+        if (!vec2.empty())
+        {
+            result = vec2.back();
+            vec2.pop_back();
+        }
+
+
+        return result;
+    }
+
+    std::vector<int> vec1;
+    std::vector<int> vec2;
+};

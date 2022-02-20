@@ -103,3 +103,28 @@ TEST_CASE_METHOD(SortAndSearchTestsFixture, "firstBadVersion", "[firstBadVersion
     }
     REQUIRE(so.firstBadVersion(inputInt) == so.expectVersion);
 }
+
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "findKthLargest", "[findKthLargest]""[SortAndSearchTests]""[testlab]")
+{
+    vector<int> nums;
+    nums = {3,2,1,5,6,4};
+    auto result = so.findKthLargest(nums, 8);
+    REQUIRE(result == 5);
+}
+
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "getLeastNumbers", "[getLeastNumbers]""[SortAndSearchTests]""[testlab]")
+{
+    vector<int> nums;
+    nums = {4,5,1,6,2,7,3,8};
+    auto result = so.getLeastNumbers(nums, 0);
+    SolutionTestUtil::myPrintVec(result);
+//    REQUIRE(result == {1,2});
+}
+
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "permute", "[permute]""[SortAndSearchTests]""[testlab]")
+{
+    vector<int> nums;
+    nums = {4,5,1,6,2,7,3,8};
+    auto result = so.permute(nums);
+//    REQUIRE(result == 5);
+}

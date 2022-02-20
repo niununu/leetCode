@@ -12,6 +12,9 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+#include <vector>
+#include <queue>
+using namespace std;
 class Solution
 {
 public:
@@ -41,4 +44,41 @@ public:
         auto max = leftDep > rightDep ? leftDep : rightDep;
         return max + 1;
     }
+
+// 102. 二叉树的层序遍历 https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
+   public:
+   vector<vector<int>> levelOrder(TreeNode* root) {
+       if (root == nullptr)
+       {
+           return {};
+       }
+       vector<vector<int>> result;
+       std::queue<TreeNode*> myQueue;
+       myQueue.push(root);
+       while(!myQueue.empty())
+       {
+           vector<int> oneLevel;
+           int length = myQueue.size();
+
+           while(length != 0)
+           {
+               if (auto node = myQueue.front())
+               {
+                   oneLevel.push_back(node->val);
+                   if (node->left)
+                   {
+                       myQueue.push(node->left);
+                   }
+                   if (node->right)
+                   {
+                       myQueue.push(node->right);
+                   }
+               }
+               --length;
+           }
+           result.push_back(oneLevel);
+       }
+
+       return result;
+   }
 }; // class Solution

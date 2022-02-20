@@ -3,6 +3,7 @@
 */
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 using namespace std;
 /*
 合并两个有序数组
@@ -76,4 +77,238 @@ public:
         findIn(1, n, firstBad);
         return firstBad;
     }
-};
+
+    // Heap_sort
+    // 215. 数组中的第K个最大元素 https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
+    public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int result = nums[0];
+        int vecLength = nums.size();
+        adjustHeap(nums, vecLength);
+        k = k <= vecLength ? k : vecLength;
+        for (int i = 0; i < k; ++i)
+        {
+            swap(nums[0], nums.back());
+            result = nums.back();
+            nums.pop_back();
+            std::cout << result << endl;
+            vecLength = nums.size();
+            adjustHeap(nums, vecLength);
+        }
+        
+        return result;
+    }
+
+    void adjustHeap(vector<int>& nums, int& vecLength)
+    {
+        for (int i = vecLength/2 - 1; i >= 0; --i)
+        {
+            adjustPerBigHeap(i, nums, vecLength);
+        }
+    }
+
+    void adjustPerBigHeap(int root, vector<int>& nums, int vecLength)
+    {
+        int left = 2*root + 1;
+        int right = 2*root + 2;
+        if (left >= vecLength)
+        {
+            return;
+        }
+        int max = left;
+        if (right < vecLength)
+        {
+            max = nums[left] > nums[right] ? left : right;
+        }
+
+        if (nums[root] < nums[max])
+        {
+            swap(nums[root], nums[max]);
+        }
+    }
+    // 692. 前K个高频单词 https://leetcode-cn.com/problems/top-k-frequent-words/
+    // vector<string> topKFrequent(vector<string>& words, int k) {
+    //     vector<string> result;
+    //     std::unordered_map<std::string, int> frequentMap;
+    //     int length = 0;
+    //     auto adjustPreHeap = [&frequentMap, length](int root){
+    //         auto left = root*2 + 1;
+    //         auto right = root*2 + 2;
+    //         if (left >= length)
+    //         {
+    //             return;
+    //         }
+
+    //         int max = left;
+    //         if (right < length)
+    //         {
+    //             max = frequentMap[left].second() > frequentMap[right].second() ? left : right;
+    //         }
+
+    //         if (frequentMap[max].second() < frequentMap[root].second())
+    //         {
+    //             swap(frequentMap[max], frequentMap[root]);
+    //         }
+    //     }
+
+    //     auto adjustHeap = [length](){
+    //         for (int i = length/2 - 1; i > 0; --i)
+    //         {
+    //             adjustPreHeap(i);
+    //         }
+    //     }
+
+    //     for(const auto& word : words)
+    //     {
+    //         if (frequentMap.find(word) != frequentMap.end())
+    //         {
+    //             frequentMap[word] = 1;
+    //         }
+    //         else
+    //         {
+    //             ++frequentMap[word];
+    //         }
+    //     }
+    //     length = frequentMap.size();
+
+    //     adjustHeap();
+    //     for (int i = 0; i < k; ++i)
+    //     {
+    //         result.push_back(frequentMap[length - 1].first());
+    //         swap(frequentMap[0], frequentMap[length - 1]);
+    //         frequentMap.erase();
+    //     }
+    // }
+
+// 46. 全排列 https://leetcode-cn.com/problems/permutations/
+    vector<vector<int>> permute(vector<int>& nums) {
+        int length = nums.size();
+        if (length == 0)
+        {
+            return {};
+        }
+        vector<vector<int>> results;
+        std::vector<bool> used(length, false);
+        vector<int> preResult;
+        preResult.resize(length);
+        dfsPermute(0, length, preResult, nums, used, results);
+
+        return results;
+    }
+
+    void dfsPermute(int depth, int& length, vector<int> preResult, vector<int>& nums, std::vector<bool>& used, vector<vector<int>>& results)
+    {
+        if (depth == length)
+        {
+            results.push_back(preResult);
+            return;
+        }
+
+        for (int i = 0; i < length; ++i)
+        {
+            if (!used[i])
+            {
+                used[i] = true;
+                preResult.push_back(nums[i]);
+                dfsPermute(depth + 1, length, preResult, nums, used, results);
+                used[i] = false;
+                preResult.pop_back();
+            }
+        }
+    }
+
+    // 剑指 Offer 40. 最小的 K 个数
+    // vector<int> getLeastNumbers(vector<int>& arr, int k) {
+    //     vector<int> result;
+    //     result.reserve(k);
+    //     int length = arr.size();
+
+    //     auto adjustPreMinHeap = [&length, &arr](int root){
+    //         auto left = root*2 + 1;
+    //         auto right = left + 1;
+    //         if (left >= length)
+    //         {
+    //             return;
+    //         }
+
+    //         auto min = left;
+    //         if (right < length)
+    //         {
+    //             min = arr[left] < arr[right] ? left : right;
+    //         }
+
+    //         if (arr[root] > arr[min])
+    //         {
+    //             swap(arr[root], arr[min]);
+    //         }
+    //     };
+
+    //     for (int i = length/2 - 1; i >= 0; --i)
+    //     {
+    //         adjustPreMinHeap(i);
+    //     }
+
+    //     for (int i = 0; i < k; ++i)
+    //     {
+    //         result.push_back(arr[0]);
+    //         swap(arr[0], arr[length - 1]);
+    //         arr.pop_back();
+    //         length = arr.size();
+
+    //         for (int i = length/2 - 1; i >= 0; --i)
+    //         {
+    //             adjustPreMinHeap(i);
+    //         }
+    //     }
+
+    //     return result;
+    // }
+
+    vector<int> getLeastNumbers(vector<int>& arr, int k) {
+        if (k == 0)
+        {
+            return {};
+        }
+        vector<int> result;
+        result.reserve(k);
+        for (int i = 0; i < k; ++i)
+        {
+            result.push_back(arr[i]);
+        }
+
+        auto adjustHeap = [&k, &result](){
+            for (int i = k/2 - 1; i >= 0; --i)
+            {
+                int root = i;
+                auto left = root*2 + 1;
+                auto right = left + 1;
+                if (left >= k)
+                {
+                    return;
+                }
+
+                auto max = left;
+                if (right < k)
+                {
+                    max = result[left] > result[right] ? left : right;
+                }
+
+                if (result[root] < result[max])
+                {
+                    swap(result[root], result[max]);
+                }
+            }
+        }; 
+        adjustHeap();
+        for (int i = k; i < arr.size(); ++i)
+        {
+            if (arr[i] < result[0])
+            {
+                result[0] = arr[i];
+                adjustHeap();
+            }
+        }
+
+        return result;
+    }
+};// class Solution
