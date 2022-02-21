@@ -1,3 +1,4 @@
 
 build/*
 tests/lib/Catch2/
+.DS_Store

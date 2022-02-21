@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <unordered_map>
+#include <queue>
 using namespace std;
 /*
 合并两个有序数组
@@ -218,54 +219,31 @@ public:
     }
 
     // 剑指 Offer 40. 最小的 K 个数
-    // vector<int> getLeastNumbers(vector<int>& arr, int k) {
-    //     vector<int> result;
-    //     result.reserve(k);
-    //     int length = arr.size();
-
-    //     auto adjustPreMinHeap = [&length, &arr](int root){
-    //         auto left = root*2 + 1;
-    //         auto right = left + 1;
-    //         if (left >= length)
-    //         {
-    //             return;
-    //         }
-
-    //         auto min = left;
-    //         if (right < length)
-    //         {
-    //             min = arr[left] < arr[right] ? left : right;
-    //         }
-
-    //         if (arr[root] > arr[min])
-    //         {
-    //             swap(arr[root], arr[min]);
-    //         }
-    //     };
-
-    //     for (int i = length/2 - 1; i >= 0; --i)
-    //     {
-    //         adjustPreMinHeap(i);
-    //     }
-
-    //     for (int i = 0; i < k; ++i)
-    //     {
-    //         result.push_back(arr[0]);
-    //         swap(arr[0], arr[length - 1]);
-    //         arr.pop_back();
-    //         length = arr.size();
-
-    //         for (int i = length/2 - 1; i >= 0; --i)
-    //         {
-    //             adjustPreMinHeap(i);
-    //         }
-    //     }
-
-    //     return result;
-    // }
-
     vector<int> getLeastNumbers(vector<int>& arr, int k) {
-        if (k == 0)
+        vector<int> result;
+        std::priority_queue<int, vector<int>, less<int>> queue;
+        for (int i = 0; (i < k) && (i < arr.size()); ++i)
+        {
+            queue.push(arr[i]);
+        }
+
+        for (int i = k; i < arr.size() && !queue.empty(); ++i)
+        {
+            if (queue.top() > arr[i])
+            {
+                queue.pop();
+                queue.push(arr[i]);
+            }
+        }
+
+        while (!queue.empty())
+        {
+            result.push_back(queue.top());
+            queue.pop();
+        }
+        return result;
+
+/*        if (k == 0)
         {
             return {};
         }
@@ -310,5 +288,112 @@ public:
         }
 
         return result;
+*/
+
     }
+
+    // 347. 前 K 个高频元素
+    // public:
+    // vector<int> topKFrequent(vector<int>& nums, int k) {
+    //     using timesPair = std::pair<int, int>();
+    //     // vector<timesPair> result;
+
+    //     std::unordered_map<int, int> timesMap;
+    //     for (const auto& num : nums)
+    //     {
+    //         auto iter = timesMap.find(num);
+    //         if (iter != timesMap.end())
+    //         {
+    //             timesMap[num] = 1;
+    //         }
+    //         else
+    //         {
+    //             iter->second++;
+    //         }
+    //     }
+    //     auto cmp = [](timesPair m, timesPair n){
+    //         return m.second > n.second;
+    //     };
+    //     std::priority_queue<timesPair,std::vector<timesPair>, cmp> heap;
+
+    //     for (auto& [key, times] : timesMap)
+    //     {
+            
+    //     }
+    // }
+
 };// class Solution
+
+// 703. 数据流中的第 K 大元素
+class KthLargest {
+public:
+    KthLargest(int k, vector<int>& nums) {
+        heapLength = k;
+        if (k == 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < k && i < nums.size(); ++i)
+        {
+            mHeap.push_back(nums[i]);
+        }
+        adjustHeap();
+        for (int i = k; i < nums.size(); ++i)
+        {
+            add(nums[i]);
+        }
+    }
+
+    void adjustHeap()
+    {
+        int k = mHeap.size();
+        for (int i = k/2 - 1; i >= 0; --i)
+        {
+            int root = i;
+            auto left = 2 * root + 1;
+            auto right = left + 1;
+            if (left >= k)
+            {
+                return;
+            }
+
+            auto min = left;
+            if ((right < k) && (mHeap[right] < mHeap[left]))
+            {
+                min = right;
+            }
+
+            if (mHeap[0] > mHeap[min])
+            {
+                swap(mHeap[0], mHeap[min]);
+            }
+        }
+    }
+
+    int add(int val) {
+        if (mHeap.size() < heapLength) {
+            mHeap.push_back(val);
+            if (mHeap.size() == heapLength) {
+                adjustHeap();
+            }
+        }
+        else if (val > mHeap[0])
+        {
+            mHeap[0] = val;
+            adjustHeap();
+        }
+        std::cout << mHeap[0] << endl;
+        return mHeap[0];
+    }
+
+private:
+    std::vector<int> mHeap;
+    int heapLength{ 0 };
+}; // class KthLargest
+
+/**
+ * Your KthLargest object will be instantiated and called as such:
+ * KthLargest* obj = new KthLargest(k, nums);
+ * int param_1 = obj->add(val);
+ */

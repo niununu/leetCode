@@ -116,7 +116,7 @@ TEST_CASE_METHOD(SortAndSearchTestsFixture, "getLeastNumbers", "[getLeastNumbers
 {
     vector<int> nums;
     nums = {4,5,1,6,2,7,3,8};
-    auto result = so.getLeastNumbers(nums, 0);
+    auto result = so.getLeastNumbers(nums, 4);
     SolutionTestUtil::myPrintVec(result);
 //    REQUIRE(result == {1,2});
 }
@@ -127,4 +127,26 @@ TEST_CASE_METHOD(SortAndSearchTestsFixture, "permute", "[permute]""[SortAndSearc
     nums = {4,5,1,6,2,7,3,8};
     auto result = so.permute(nums);
 //    REQUIRE(result == 5);
+}
+
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "KthLargest", "[KthLargest]""[SortAndSearchTests]""[testlab]")
+{
+    int k = 2;
+    vector<int> nums {0};
+    KthLargest* obj = new KthLargest(k, nums);
+    int param_1;
+    param_1 = obj->add(-1);
+    param_1 = obj->add(1);
+    param_1 = obj->add(-2);
+    param_1 = obj->add(-4);
+    param_1 = obj->add(3);
+}
+
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "topKFrequent", "[topKFrequent]""[SortAndSearchTests]""[testlab]")
+{
+    vector<int> nums;
+    int k = 2;
+//    nums = {1,1,1,2,2,3};
+//    so.topKFrequent(nums, k);
+
 }
