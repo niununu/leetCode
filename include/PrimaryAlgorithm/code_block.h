@@ -67,7 +67,7 @@ std::vector<std::vector<int>> bfs(TreeNode* root)
     }
 
     std::queue<TreeNode*> queue;
-    queue.push_back(root);
+    queue.push(root);
     while(!queue.empty())
     {
         auto length = queue.size();
@@ -75,17 +75,17 @@ std::vector<std::vector<int>> bfs(TreeNode* root)
 
         for (int i = 0; i < length; ++i)
         {
-            if (auto top = queue.pop_front())
+            if (auto top = queue.pop())
             {
                 oneLevel.push_back(top->val);
                 if (top->left)
                 {
-                    queue.push_back(top->left);
+                    queue.push(top->left);
                 }
 
                 if (top->right)
                 {
-                    queue.push_back(top->right);
+                    queue.push(top->right);
                 }
             }
         }

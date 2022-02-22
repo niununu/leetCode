@@ -1,11 +1,26 @@
 # 树
 # 链表
 # 搜索
+## 二分查找
+[剑指 Offer 04. 二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
+
 ## 广度优先
 [102. 二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
 
+[199. 二叉树的右视图](https://leetcode-cn.com/problems/binary-tree-right-side-view/)
+
+[剑指 Offer II 044. 二叉树每层的最大值](https://leetcode-cn.com/problems/hPov7L/)
+
+
 ## 深度优先
 [46. 全排列](https://leetcode-cn.com/problems/permutations/)
+
+[剑指 Offer 26. 树的子结构](https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/)
+
+[剑指 Offer 38. 字符串的排列](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/)
+
+[剑指 Offer II 045. 二叉树最底层最左边的值](https://leetcode-cn.com/problems/LwUNpT/)
+
 
 # 排序
 ## 堆排序
