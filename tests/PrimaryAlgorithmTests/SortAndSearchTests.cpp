@@ -144,10 +144,15 @@ TEST_CASE_METHOD(SortAndSearchTestsFixture, "KthLargest", "[KthLargest]""[SortAn
 
 TEST_CASE_METHOD(SortAndSearchTestsFixture, "topKFrequent", "[topKFrequent]""[SortAndSearchTests]""[testlab]")
 {
-    vector<int> nums;
+    // vector<string> words;
+    vector<int> words;
     int k = 2;
-//    nums = {1,1,1,2,2,3};
-//    so.topKFrequent(nums, k);
+    words = {1,1,1,2,2,3};
+
+    // words = {"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"};
+    auto result = so.topKFrequent(words, k);
+    SolutionTestUtil::myPrintVec(result);
+    SolutionTestUtil::isSameVector(result, {1,2});
 
 }
 
@@ -162,7 +167,7 @@ TEST_CASE_METHOD(SortAndSearchTestsFixture, "threeSumClosest", "[threeSumClosest
 
     nums = {-1,0,1,2,-1,-4};
     // auto result = so.threeSum(nums, k);
-    auto result = so.threeSum(5);
+    //auto result = so.threeSum(5);
 
 
 }

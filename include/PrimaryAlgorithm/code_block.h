@@ -38,6 +38,35 @@ public:
         dfsTree(node->left);
         dfsTree(node->right);
     }
+    // 全排列
+
+    void dfsNum(std::vector<char> input)
+    {
+        std::vector<char> input = {'A', 'B', 'C'};
+        int length = input.size();
+        bool booked[length] = { false };
+
+        auto dfs = [&length, &booked](int index, std::string& output){
+    // void dfs(int index, std::string& output)
+    // {
+        if (index == length - 1)
+        {
+            cout << output << endl;
+            return;
+        }
+
+        for (int i = 0; i < length; ++i)
+        {
+            if (!booked[index])
+            {
+                output.insert(input[index]);
+                booked[index] = true;
+                dfs(index + 1, output);
+                booked[index] = false;
+            }
+        }
+    }
+    }
 
 // BFS
     void bfsTree(TreeNodePtr root)

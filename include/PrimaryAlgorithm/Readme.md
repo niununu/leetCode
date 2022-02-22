@@ -9,10 +9,15 @@
 
 # 排序
 ## 堆排序
-[剑指 Offer 40. 最小的 K 个数]
 [215. 数组中的第 K 个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)
+
 [703. 数据流中的第 K 大元素]
-[347. 前 K 个高频元素]
+
+[347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/submissions/)
+
+[692. 前K个高频单词](https://leetcode-cn.com/problems/top-k-frequent-words/)
+
+[剑指 Offer 40. 最小的 K 个数]
 
 ```
 # include <queue>
@@ -22,11 +27,14 @@ queue.push(); // 添加
 queue.pop(); // 删除顶
 ```
 # 双指针
-[1. 两数之和] (https://leetcode-cn.com/problems/two-sum/)
+[1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 # 动态规划
 [300. 最长递增子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
+
 [53. 最大子数组和](https://leetcode-cn.com/problems/maximum-subarray/)
+
 [俄罗斯套娃信封问题]
+
 [最长递增子序列的个数]
 
 # 系统设计
@@ -84,20 +92,14 @@ using lessHeap = std::priority_queue<int, std::vector<int>, std::greater<int> >;
 using bigHeap = std::priority_queue<int, std::vector<int>, std::less<int> >;
 
 // 使用自定义比较
-class mycomparison
+struct myComp
 {
-  bool reverse;
-public:
-  mycomparison(const bool& revparam=false)
-    {reverse=revparam;}
-  bool operator() (const int& lhs, const int&rhs) const
-  {
-    if (reverse) return (lhs>rhs);
-    else return (lhs<rhs);
-  }
+    bool operator() (int i, int j)
+    {
+      return i < j; // return true是**需要**调整的case
+    }
 };
-
-typedef std::priority_queue<int, std::vector<int>, mycomparison> mypq_type;
+std::priority_queue<int, std::vector<int>, myComp> mypq_type;
 
 // modify
 堆顶 = myHeap.top();
@@ -107,6 +109,13 @@ myHeap.push(11);
 // swap
 ```
 
+## 排序 -- sort
+```
+#include <algorithm>
+std::sort(s.begin(), s.end(), [](int a, int b) {
+      return a > b;
+});
+```
 
 
 

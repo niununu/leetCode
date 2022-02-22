@@ -7,13 +7,6 @@
 #include <queue>
 #include <list>
 using namespace std;
-/*
-合并两个有序数组
-给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。
-请你 合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序 排列。
-注意：最终，合并后数组不应由函数返回，而是存储在数组 nums1 中。为了应对这种情况，nums1 的初始长度为 m + n，其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n 。
-*/
-
 
 // 703. 数据流中的第 K 大元素
 class KthLargest {
@@ -82,6 +75,7 @@ private:
     std::vector<int> mHeap;
     int heapLength{ 0 };
 }; // class KthLargest
+
 class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
@@ -197,59 +191,69 @@ public:
             swap(nums[root], nums[max]);
         }
     }
+
     // 692. 前K个高频单词 https://leetcode-cn.com/problems/top-k-frequent-words/
-    // vector<string> topKFrequent(vector<string>& words, int k) {
-    //     vector<string> result;
-    //     std::unordered_map<std::string, int> frequentMap;
-    //     int length = 0;
-    //     auto adjustPreHeap = [&frequentMap, length](int root){
-    //         auto left = root*2 + 1;
-    //         auto right = root*2 + 2;
-    //         if (left >= length)
-    //         {
-    //             return;
-    //         }
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        vector<string> result;
+        using wordTimesMapPair = std::pair<std::string, int>;
+        std::unordered_map<std::string, int> wordTimesMap;
+        for (const auto& word : words)
+        {
+            if (wordTimesMap.find(word) != wordTimesMap.end())
+            {
+                wordTimesMap[word]++;
+            }
+            else
+            {
+                wordTimesMap[word] = 1;
+            }
+        }
 
-    //         int max = left;
-    //         if (right < length)
-    //         {
-    //             max = frequentMap[left].second() > frequentMap[right].second() ? left : right;
-    //         }
+        struct myCmp
+        {
+            bool operator() (wordTimesMapPair pair1, wordTimesMapPair pair2)
+            {
+                if (pair1.second > pair2.second)
+                {
+                    return true;
+                }
+                else if (pair1.second == pair2.second)
+                {
+                    return pair1.first < pair2.first;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        };
+        std::priority_queue<wordTimesMapPair, std::vector<wordTimesMapPair>, myCmp> heap;
 
-    //         if (frequentMap[max].second() < frequentMap[root].second())
-    //         {
-    //             swap(frequentMap[max], frequentMap[root]);
-    //         }
-    //     }
-
-    //     auto adjustHeap = [length](){
-    //         for (int i = length/2 - 1; i > 0; --i)
-    //         {
-    //             adjustPreHeap(i);
-    //         }
-    //     }
-
-    //     for(const auto& word : words)
-    //     {
-    //         if (frequentMap.find(word) != frequentMap.end())
-    //         {
-    //             frequentMap[word] = 1;
-    //         }
-    //         else
-    //         {
-    //             ++frequentMap[word];
-    //         }
-    //     }
-    //     length = frequentMap.size();
-
-    //     adjustHeap();
-    //     for (int i = 0; i < k; ++i)
-    //     {
-    //         result.push_back(frequentMap[length - 1].first());
-    //         swap(frequentMap[0], frequentMap[length - 1]);
-    //         frequentMap.erase();
-    //     }
-    // }
+        for (auto iter = wordTimesMap.begin(); iter != wordTimesMap.end(); ++iter)
+        {
+            if (heap.size() == k)
+            {
+                auto top = heap.top();
+                myCmp x;
+                if (!x(top, *iter))
+                {
+                    heap.pop();
+                    heap.push(*iter);
+                }
+            }
+            else
+            {
+                heap.push(*iter);
+            }
+        }
+        result.resize(k);
+        for (int i = k - 1; i >= 0 && !heap.empty(); --i)
+        {
+            result[i] = heap.top().first;
+            heap.pop();
+        }
+        return result;
+    }
 
 // 46. 全排列 https://leetcode-cn.com/problems/permutations/
     vector<vector<int>> permute(vector<int>& nums) {
@@ -312,85 +316,59 @@ public:
             queue.pop();
         }
         return result;
-
-/*        if (k == 0)
-        {
-            return {};
-        }
-        vector<int> result;
-        result.reserve(k);
-        for (int i = 0; i < k; ++i)
-        {
-            result.push_back(arr[i]);
-        }
-
-        auto adjustHeap = [&k, &result](){
-            for (int i = k/2 - 1; i >= 0; --i)
-            {
-                int root = i;
-                auto left = root*2 + 1;
-                auto right = left + 1;
-                if (left >= k)
-                {
-                    return;
-                }
-
-                auto max = left;
-                if (right < k)
-                {
-                    max = result[left] > result[right] ? left : right;
-                }
-
-                if (result[root] < result[max])
-                {
-                    swap(result[root], result[max]);
-                }
-            }
-        }; 
-        adjustHeap();
-        for (int i = k; i < arr.size(); ++i)
-        {
-            if (arr[i] < result[0])
-            {
-                result[0] = arr[i];
-                adjustHeap();
-            }
-        }
-
-        return result;
-*/
-
     }
 
-    // 347. 前 K 个高频元素
-    // public:
-    // vector<int> topKFrequent(vector<int>& nums, int k) {
-    //     using timesPair = std::pair<int, int>();
-    //     // vector<timesPair> result;
+    // 347. 前 K 个高频元素 https://leetcode-cn.com/problems/top-k-frequent-elements/submissions/
+    public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        vector<int> result;
+        unordered_map<int, int> hashMap;
+        using mapPair = std::pair<int, int>;
+        for (const auto& num : nums)
+        {
+            if (hashMap.find(num) != hashMap.end())
+            {
+                hashMap[num]++;
+            }
+            else
+            {
+                hashMap[num] = 1;
+            }
+        }
+        struct myCmp
+        {
+            bool operator() (mapPair pair1, mapPair pair2)
+            {
+                return pair1.second > pair2.second;
+            }
+        };
+        std::priority_queue<mapPair, vector<mapPair>, myCmp> queue;
+        for (auto iter = hashMap.begin(); iter != hashMap.end(); ++iter)
+        {
+            if (queue.size() == k)
+            {
+                auto top = queue.top();
+                myCmp cmp;
+                if (!cmp(top, *iter))
+                {
+                    queue.pop();
+                    queue.push(*iter);
+                }
+            }
+            else
+            {
+                queue.push(*iter);
+            }
+        }
 
-    //     std::unordered_map<int, int> timesMap;
-    //     for (const auto& num : nums)
-    //     {
-    //         auto iter = timesMap.find(num);
-    //         if (iter != timesMap.end())
-    //         {
-    //             timesMap[num] = 1;
-    //         }
-    //         else
-    //         {
-    //             iter->second++;
-    //         }
-    //     }
-    //     auto cmp = [](timesPair m, timesPair n){
-    //         return m.second > n.second;
-    //     };
-    //     std::priority_queue<timesPair,std::vector<timesPair>, cmp> heap;
+        while(!queue.empty())
+        {
+            result.push_back(queue.top().first);
+            queue.pop();
+        }
+        return result;
+    }
 
-    //     for (auto& [key, times] : timesMap)
-    //     {
-            
-    //     }
-    // }
     // 1. 两数之和 https://leetcode-cn.com/problems/two-sum/
     vector<int> twoSum(vector<int>& nums, int target) {
         vector<int> result;
