@@ -21,7 +21,8 @@ queue.top(); // 访问顶
 queue.push(); // 添加
 queue.pop(); // 删除顶
 ```
-
+# 双指针
+[1. 两数之和] (https://leetcode-cn.com/problems/two-sum/)
 # 动态规划
 [300. 最长递增子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
 [53. 最大子数组和](https://leetcode-cn.com/problems/maximum-subarray/)
@@ -30,6 +31,9 @@ queue.pop(); // 删除顶
 
 # 系统设计
 [146. LRU 缓存](https://leetcode-cn.com/problems/lru-cache/)
+
+# 滑动窗口
+[16. 最接近的三数之和](https://leetcode-cn.com/problems/3sum-closest/)
 
 # 常用STL
 ## hash表 - unordered_map

@@ -150,3 +150,19 @@ TEST_CASE_METHOD(SortAndSearchTestsFixture, "topKFrequent", "[topKFrequent]""[So
 //    so.topKFrequent(nums, k);
 
 }
+
+
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "threeSumClosest", "[threeSumClosest]""[SortAndSearchTests]""[testlab]")
+{
+    vector<int> nums;
+    int k = 6;
+    // nums = {0,2,1,-3};
+    // auto result = so.threeSumClosest(nums, k);
+    // REQUIRE(result == 0);
+
+    nums = {-1,0,1,2,-1,-4};
+    // auto result = so.threeSum(nums, k);
+    auto result = so.threeSum(5);
+
+
+}

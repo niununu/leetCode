@@ -5,6 +5,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <queue>
+#include <list>
 using namespace std;
 /*
 合并两个有序数组
@@ -12,6 +13,75 @@ using namespace std;
 请你 合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序 排列。
 注意：最终，合并后数组不应由函数返回，而是存储在数组 nums1 中。为了应对这种情况，nums1 的初始长度为 m + n，其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n 。
 */
+
+
+// 703. 数据流中的第 K 大元素
+class KthLargest {
+public:
+    KthLargest(int k, vector<int>& nums) {
+        heapLength = k;
+        if (k == 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < k && i < nums.size(); ++i)
+        {
+            mHeap.push_back(nums[i]);
+        }
+        adjustHeap();
+        for (int i = k; i < nums.size(); ++i)
+        {
+            add(nums[i]);
+        }
+    }
+
+    void adjustHeap()
+    {
+        int k = mHeap.size();
+        for (int i = k/2 - 1; i >= 0; --i)
+        {
+            int root = i;
+            auto left = 2 * root + 1;
+            auto right = left + 1;
+            if (left >= k)
+            {
+                return;
+            }
+
+            auto min = left;
+            if ((right < k) && (mHeap[right] < mHeap[left]))
+            {
+                min = right;
+            }
+
+            if (mHeap[0] > mHeap[min])
+            {
+                swap(mHeap[0], mHeap[min]);
+            }
+        }
+    }
+
+    int add(int val) {
+        if (mHeap.size() < heapLength) {
+            mHeap.push_back(val);
+            if (mHeap.size() == heapLength) {
+                adjustHeap();
+            }
+        }
+        else if (val > mHeap[0])
+        {
+            mHeap[0] = val;
+            adjustHeap();
+        }
+        std::cout << mHeap[0] << endl;
+        return mHeap[0];
+    }
+
+private:
+    std::vector<int> mHeap;
+    int heapLength{ 0 };
+}; // class KthLargest
 class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
@@ -321,79 +391,103 @@ public:
             
     //     }
     // }
+    // 1. 两数之和 https://leetcode-cn.com/problems/two-sum/
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> result;
+        unordered_map<int, int> hashMap;
+        for (int i = 0; i < nums.size(); ++i)
+        {
+            auto diff = target - nums[i];
+            if (hashMap.find(diff) != hashMap.end())
+            {
+                result.push_back(hashMap[diff]);
+                result.push_back(i);
+                break;
+            }
+            else
+            {
+                hashMap[nums[i]] = i;
+            }
+        }
 
+
+        return result;
+    }
+    // 15. 三数之和
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        if (nums.size() < 3)
+        {
+            return {};
+        }
+
+        vector<vector<int>> result;
+        for (int i = 0; i < nums.size(); ++i)
+        {
+            /* code */
+        }
+
+        return result;
+    }
+// 16. 最接近的三数之和
+    int threeSumClosest(vector<int>& nums, int target) {
+        std::sort(nums.begin(), nums.end());
+
+        int preSum = nums[0] + nums[1] + nums[2];
+        int resultPlus = preSum;
+        int minDiff = abs(target - preSum);
+
+        for (int begin = 1; begin < nums.size() - 2; ++begin)
+        {
+            auto end = begin + 2;
+            preSum = preSum - nums[begin - 1] + nums[end];
+            auto diff = abs(target - preSum);
+
+            if (diff == 0)
+            {
+                return preSum;
+            }
+
+            if (minDiff > diff)
+            {
+                minDiff = diff;
+                resultPlus = preSum;
+            }
+        }
+
+        return resultPlus;
+    }
+
+    vector<vector<int>> fun(int input) {
+        vector<vector<int>> result;
+        std::vector<int> popVec;
+        
+        std::list<int> list;
+        for (int i = 1; i <= input; ++i)
+        {
+            list.push_back(i);
+        }
+        auto iter = list.begin();
+        while(list.size() != 2)
+        {
+            if (iter == list.end())
+            {
+                iter = list.begin();
+            }
+
+            iter = iter++;
+            iter = iter++;
+
+            popVec.push_back(*iter);
+            list.erase(iter);
+        }
+        result.push_back(popVec);
+
+        vector<int> remindVec;
+        remindVec.push_back(list.front());
+        remindVec.push_back(list.back());
+        result.push_back(remindVec);
+
+
+        return result;
+    }
 };// class Solution
-
-// 703. 数据流中的第 K 大元素
-class KthLargest {
-public:
-    KthLargest(int k, vector<int>& nums) {
-        heapLength = k;
-        if (k == 0)
-        {
-            return;
-        }
-
-        for (int i = 0; i < k && i < nums.size(); ++i)
-        {
-            mHeap.push_back(nums[i]);
-        }
-        adjustHeap();
-        for (int i = k; i < nums.size(); ++i)
-        {
-            add(nums[i]);
-        }
-    }
-
-    void adjustHeap()
-    {
-        int k = mHeap.size();
-        for (int i = k/2 - 1; i >= 0; --i)
-        {
-            int root = i;
-            auto left = 2 * root + 1;
-            auto right = left + 1;
-            if (left >= k)
-            {
-                return;
-            }
-
-            auto min = left;
-            if ((right < k) && (mHeap[right] < mHeap[left]))
-            {
-                min = right;
-            }
-
-            if (mHeap[0] > mHeap[min])
-            {
-                swap(mHeap[0], mHeap[min]);
-            }
-        }
-    }
-
-    int add(int val) {
-        if (mHeap.size() < heapLength) {
-            mHeap.push_back(val);
-            if (mHeap.size() == heapLength) {
-                adjustHeap();
-            }
-        }
-        else if (val > mHeap[0])
-        {
-            mHeap[0] = val;
-            adjustHeap();
-        }
-        std::cout << mHeap[0] << endl;
-        return mHeap[0];
-    }
-
-private:
-    std::vector<int> mHeap;
-    int heapLength{ 0 };
-}; // class KthLargest
-
-/**
- * Your KthLargest object will be instantiated and called as such:
- * KthLargest* obj = new KthLargest(k, nums);
- * int param_1 = obj->add(val);
- */
