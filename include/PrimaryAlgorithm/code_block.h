@@ -24,9 +24,11 @@ std::sort(vec.begin(), vec.end(), [](int i, int j){
 }); // default < 
 
 // DFS
+/*
 std::vector<int> nums;
 int length = nums.size();
 std::vector<bool> used{ length, false };
+*/
 void dfs(int index, std::vector<int>& oneOption)
 {
     if (oneOption.size() == length)
@@ -49,6 +51,45 @@ void dfs(int index, std::vector<int>& oneOption)
 }
 
 // BFS
-std::vector<std::vector<int>> bfs(std::vector<int> nums)
+/*
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+};
+ */
+std::vector<std::vector<int>> bfs(TreeNode* root)
 {
+    std::vector<std::vector<int>> results;
+    if (root == nullptr)
+    {
+        return {};
+    }
+
+    std::queue<TreeNode*> queue;
+    queue.push_back(root);
+    while(!queue.empty())
+    {
+        auto length = queue.size();
+        std::vector<int> oneLevel;
+
+        for (int i = 0; i < length; ++i)
+        {
+            if (auto top = queue.pop_front())
+            {
+                oneLevel.push_back(top->val);
+                if (top->left)
+                {
+                    queue.push_back(top->left);
+                }
+
+                if (top->right)
+                {
+                    queue.push_back(top->right);
+                }
+            }
+        }
+        results.push_back(oneLevel);
+    }
+    return results;
 }
