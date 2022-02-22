@@ -1,101 +1,54 @@
-#include <vector>
-#include <iostream>
-#include <bitset>
-using namespace std;
-
-class Solution {
-template <class T>
-static void myPrintVec(std::vector<T> vec)
+// Heap
+#include <queue>
+using pair = std::pair<int, int>;
+struct myCmp
 {
-    for (const auto& item : vec)
+    bool operator() (pair pair1, pair pair2) const
     {
-        std::cout << item << " ";
-    }
-    std::cout << endl;
-}
-// DFS
-public:
-    struct TreeNode : std::enable_share_from_this<TreeNode>
-    {
-        int val;
-        TreeNode *left;
-        TreeNode *right;
-        TreeNode() : val(0), left(nullptr), right(nullptr) {}
-        TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-        TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    };
-    using TreeNodePtr = std::make_shared<TreeNode>;
-
-public:
-    void dfsTree(TreeNodePtr node, std::vector<int>& allNodeResult)
-    {
-        if (!node)
-        {
-            return;
-        }
-
-        allNodeResult.push_back(node->val);
-        dfsTree(node->left);
-        dfsTree(node->right);
-    }
-    // 全排列
-
-    void dfsNum(std::vector<char> input)
-    {
-        std::vector<char> input = {'A', 'B', 'C'};
-        int length = input.size();
-        bool booked[length] = { false };
-
-        auto dfs = [&length, &booked](int index, std::string& output){
-    // void dfs(int index, std::string& output)
-    // {
-        if (index == length - 1)
-        {
-            cout << output << endl;
-            return;
-        }
-
-        for (int i = 0; i < length; ++i)
-        {
-            if (!booked[index])
-            {
-                output.insert(input[index]);
-                booked[index] = true;
-                dfs(index + 1, output);
-                booked[index] = false;
-            }
-        }
-    }
-    }
-
-// BFS
-    void bfsTree(TreeNodePtr root)
-    {
-        std::queue<TreeNodePtr>helpQueue;
-        helpQueue.push(root)
-
-        std::vector<int> allNodeResult;
-        while(!helpQueue.empty())
-        {
-            int levelLenth = helpQueue.size();
-            std::vector<int> oneLevelResult;
-            for (int i = 0; i < levelLenth; ++i)
-            {
-                auto popNode = helpQueue.pop();
-                allNodeResult.push_back(popNode->val);
-                oneLevelResult.push_back(popNode->val);
-                if (popNode->left)
-                {
-                    helpQueue.insert(popNode->left);
-                }
-
-                if (popNode->right)
-                {
-                    helpQueue.insert(popNode->right);
-                }
-            }
-            myPrintVec(oneLevelResult);
-        }
-        myPrintVec(allNodeResult);
+        return pair1.second > pair2.second; // true means need adjust
     }
 };
+std::priority_queue<pair, std::vector<pair>, myCmp> queue;
+queue.push(**);
+auto top = queue.top();
+queue.pop();
+
+// Hash map
+#include <unordered_map>
+std::unordered_map<int, int> hashMap;
+
+// sort
+#include <algorithm>
+std::sort(vec.begin(), vec.end(), [](int i, int j){
+    return i > j;
+}); // default < 
+
+// DFS
+std::vector<int> nums;
+int length = nums.size();
+std::vector<bool> used{ length, false };
+void dfs(int index, std::vector<int>& oneOption)
+{
+    if (oneOption.size() == length)
+    {
+        // cout << oneOption;
+        return;
+    }
+
+    for (int i = 0; i < length; ++i)
+    {
+        if (!used[i])
+        {
+            used[i] = true;
+            oneOption.push_back(nums[i]);
+            dfs(index + 1, oneOption);
+            used[i] = false;
+            oneOption.pop_back();
+        }
+    }
+}
+
+// BFS
+std::vector<std::vector<int>> bfs(std::vector<int> nums)
+{
+}
