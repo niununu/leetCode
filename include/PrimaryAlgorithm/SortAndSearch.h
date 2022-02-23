@@ -468,4 +468,33 @@ public:
 
         return result;
     }
+
+    
+    std::vector<int> remindTwo(int input)
+    {
+        std::list<int> list;
+        for (int i = 1; i <= input; ++i)
+        {
+            list.push_back(i);
+        }
+
+        auto iter = std::next(list.begin(), 1);
+        auto moveOneStep = [&list](std::list<int>::iterator iter){
+            auto next = std::next(iter, 1);
+            if (next == list.end())
+            {
+                next = list.begin();
+            }
+            return next;
+        };
+
+        while(list.size() != 2)
+        {
+            auto next = moveOneStep(iter);
+            list.erase(iter);
+            iter = moveOneStep(next);
+        }
+
+        return {list.front(), list.back()};
+    }
 };// class Solution

@@ -81,4 +81,48 @@ public:
 
        return result;
    }
+[ [1  , 4  , 7  , 11, 15],
+  [2  , 5  , 8  , 12, 19],
+  [3  , 6  , 9  , 16, 22],
+  [10, 13, 14, 17, 24],
+  [18, 21, 23, 26, 30] ]
+给定 target = 5，返回 true。
+
+给定 target = 20，返回 false。
+    bool search(std::vector<std::vector<int>> nums, int target)
+    {
+        int col = nums.size();
+        if (col.size() == 0)
+        {
+            return false;
+        }
+        int row = nums[0].size();
+        if (row.size() == 0)
+        {
+            return false;
+        }
+
+        int i = 0;
+        int j = row -1;
+        int flag = nums[i][j];
+
+        while((i < col) && (j < row))
+        {
+            if (target == flag)
+            {
+                return true;
+            }
+            else if (target > flag)
+            {
+                flag = nums[i + 1][j];
+            }
+            else
+            {
+                flag = nums[i][j - 1];
+            }
+        }
+
+        return false;
+    }
+
 }; // class Solution

@@ -153,7 +153,6 @@ TEST_CASE_METHOD(SortAndSearchTestsFixture, "topKFrequent", "[topKFrequent]""[So
     auto result = so.topKFrequent(words, k);
     SolutionTestUtil::myPrintVec(result);
     SolutionTestUtil::isSameVector(result, {1,2});
-
 }
 
 
@@ -168,6 +167,10 @@ TEST_CASE_METHOD(SortAndSearchTestsFixture, "threeSumClosest", "[threeSumClosest
     nums = {-1,0,1,2,-1,-4};
     // auto result = so.threeSum(nums, k);
     //auto result = so.threeSum(5);
+}
 
-
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "remindTwo", "[remindTwo]""[SortAndSearchTests]""[testlab]")
+{
+    auto result = so.remindTwo(50);
+    SolutionTestUtil::myPrintVec(result);
 }

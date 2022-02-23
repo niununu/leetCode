@@ -23,6 +23,25 @@ std::sort(vec.begin(), vec.end(), [](int i, int j){
     return i > j;
 }); // default < 
 
+// list
+#include <list>
+std::list<string> list{ "a", "b", "c"};
+string front = list.front();
+string back = list.back();
+list.erase(iter);
+auto it = list.begin();
+it = list.insert(it, "200");
+list.push_front("a");
+list.push_back("a");
+list.pop_front();
+list.pop_back();
+list1.merge(list2);
+
+// iterator
+#include <iterator>
+auto nextNext = std::next(iter, 2);
+auto prevPrev = std::prev(it, 2);
+auto items = std::distance(il.begin(), il.end());
 // DFS
 /*
 std::vector<int> nums;
@@ -93,3 +112,4 @@ std::vector<std::vector<int>> bfs(TreeNode* root)
     }
     return results;
 }
+
