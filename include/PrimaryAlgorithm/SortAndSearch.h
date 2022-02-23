@@ -501,12 +501,12 @@ public:
     bool searchMatric(std::vector<std::vector<int>> nums, int target)
     {
         int col = nums.size();
-        if (col.size() == 0)
+        if (col == 0)
         {
             return false;
         }
         int row = nums[0].size();
-        if (row.size() == 0)
+        if (row == 0)
         {
             return false;
         }
@@ -532,26 +532,5 @@ public:
         }
 
         return false;
-    }
-
-    int maxProfit(std::vector<int> prices)
-    {
-        int length = prices.size();
-        std::vector<std::vector<int>> dp(length, std::vector<int>(2, 0));
-        dp[0][0] = 0;
-        dp[0][1] = 0 - prices[0];
-        int i = 1;
-        int max = 0;
-        while(i < length)
-        {
-            dp[i][0] = dp[i - 1][0] > dp[i - 1][1] + prices[i] ? dp[i - 1][0] : dp[i - 1][1] + prices[i];
-            dp[i][1] = dp[i - 1][1] > dp[i - 1][0] - prices[i] ? dp[i - 1][1] : dp[i - 1][0] - prices[i];
-            if (dp[i][0] > max)
-            {
-                max = dp[i][0];
-            }
-        }
-
-        return max;
     }
 };// class Solution

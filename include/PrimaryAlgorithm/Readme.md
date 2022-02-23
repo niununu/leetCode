@@ -53,85 +53,26 @@ queue.pop(); // 删除顶
 
 [最长递增子序列的个数]
 
+## 买卖股票
+[121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)
+
+[122. 买卖股票的最佳时机 II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)
+
+[309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+
+[714. 买卖股票的最佳时机含手续费](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
+
+## 打家劫舍
+[打家劫舍]
+[213. 打家劫舍 II](https://leetcode-cn.com/problems/house-robber-ii/submissions/)
+[740. 删除并获得点数](https://leetcode-cn.com/problems/delete-and-earn/)
+
 # 系统设计
 [146. LRU 缓存](https://leetcode-cn.com/problems/lru-cache/)
 
 # 滑动窗口
 [16. 最接近的三数之和](https://leetcode-cn.com/problems/3sum-closest/)
 
-# 常用STL
-## hash表 - unordered_map
-```
-#include <unordered_map>
-using stringmap = std::unordered_map<std::string,std::string>;
-// init
-stringmap first = {{"AAPL","Apple"},{"MSFT","Microsoft"}};
-
-// add
-first.insert ( {{"sugar",0.8},{"salt",0.1}} );
-stringmap["aaa"] = "aaa";
-
-// modify
-stringmap["sugar"] = "sugar";
-
-// remove
-stringmap.earse("sugar");
-```
-
-## 双向链表 - list
-```
-#include <list>
-// init
-std::list<int> mylist;
-
-// modify
-
-auto head = mylist.front();
-auto tail = mylist.back();
-
-mylist.push_front(11);
-mylist.pop_front();
-
-mylist.push_back(77);
-mylist.pop_back(22);
-
-mylist.erase(iter);
-mylist.insert(iter);
-```
-
-## 堆 - priority_queue
-```
-#include <queue>
-// 小顶堆
-using lessHeap = std::priority_queue<int, std::vector<int>, std::greater<int> >;
-// 大顶堆 -- default
-using bigHeap = std::priority_queue<int, std::vector<int>, std::less<int> >;
-
-// 使用自定义比较
-struct myComp
-{
-    bool operator() (int i, int j)
-    {
-      return i < j; // return true是**需要**调整的case
-    }
-};
-std::priority_queue<int, std::vector<int>, myComp> mypq_type;
-
-// modify
-堆顶 = myHeap.top();
-myHeap.pop(); // 删除顶
-myHeap.push(11);
-
-// swap
-```
-
-## 排序 -- sort
-```
-#include <algorithm>
-std::sort(s.begin(), s.end(), [](int a, int b) {
-      return a > b;
-});
-```
 
 
 

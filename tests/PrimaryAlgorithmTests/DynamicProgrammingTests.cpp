@@ -37,3 +37,17 @@ TEST_CASE_METHOD(DynamicProgrammingTestsFixture, "maxEnvelopes", "[maxEnvelopes]
     auto result = so.maxEnvelopes(envelopes);
     // REQUIRE(result == 5);
 }
+
+TEST_CASE_METHOD(DynamicProgrammingTestsFixture, "maxProfit", "[maxProfit]""[DynamicProgrammingTests]""[testlab]")
+{
+    input = {1};
+    auto result = so.rob(input);
+    REQUIRE(result == 4);
+}
+
+TEST_CASE_METHOD(DynamicProgrammingTestsFixture, "deleteAndEarn", "[deleteAndEarn]""[DynamicProgrammingTests]""[testlab]")
+{
+    input = {3,4,2};
+    auto result = so.deleteAndEarn(input);
+    REQUIRE(result == 6);
+}

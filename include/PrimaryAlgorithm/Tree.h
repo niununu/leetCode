@@ -15,6 +15,7 @@
 #include <vector>
 #include <queue>
 #include <set>
+#include <unordered_map>
 using namespace std;
 class Solution
 {
@@ -334,29 +335,29 @@ public:
 
     // 128. 最长连续序列 https://leetcode-cn.com/problems/longest-consecutive-sequence/
     int longestConsecutive(vector<int>& nums) {
-        int max = 0;
-        unordered_map<int, int> map;
-        for (int i = 0; i < nums.size(); ++i)
-        {
-            map[num] = i;
-        }
-        
-        for (int i = 0; i < nums.size(); ++i)
-        {
-            int start = 1;
-            int count = 1;
-            while(map.find(nums[i] + start) != end())
-            {
-                index++;
-                count++;
-            }
-
-            if (count > max)
-            {
-                max = count;
-            }
-        }
-
-        return max;
+//        int max = 0;
+//        std::unordered_map<int, int> map;
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            map[num] = i;
+//        }
+//        
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            int start = 1;
+//            int count = 1;
+//            while(map.find(nums[i] + start) != end())
+//            {
+//                index++;
+//                count++;
+//            }
+//
+//            if (count > max)
+//            {
+//                max = count;
+//            }
+//        }
+//
+//        return max;
     }
 }; // class Solution
