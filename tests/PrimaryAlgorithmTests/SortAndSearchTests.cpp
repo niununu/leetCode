@@ -155,22 +155,47 @@ TEST_CASE_METHOD(SortAndSearchTestsFixture, "topKFrequent", "[topKFrequent]""[So
     SolutionTestUtil::isSameVector(result, {1,2});
 }
 
-
-TEST_CASE_METHOD(SortAndSearchTestsFixture, "threeSumClosest", "[threeSumClosest]""[SortAndSearchTests]""[testlab]")
-{
-    vector<int> nums;
-    int k = 6;
-    // nums = {0,2,1,-3};
-    // auto result = so.threeSumClosest(nums, k);
-    // REQUIRE(result == 0);
-
-    nums = {-1,0,1,2,-1,-4};
-    // auto result = so.threeSum(nums, k);
-    //auto result = so.threeSum(5);
-}
-
 TEST_CASE_METHOD(SortAndSearchTestsFixture, "remindTwo", "[remindTwo]""[SortAndSearchTests]""[testlab]")
 {
     auto result = so.remindTwo(50);
     SolutionTestUtil::myPrintVec(result);
+}
+
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "threeSum", "[threeSum]""[SortAndSearchTests]""[testlab]")
+{
+    vector<int> nums;
+    nums = {-1,0,1,2,-1,-4};
+    auto result = so.threeSum(nums);
+    for (const auto& item : result)
+    {
+       SolutionTestUtil::myPrintVec(item);
+    }
+}
+
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "mergeaa", "[mergeaa]""[SortAndSearchTests]""[testlab]")
+{
+    vector<vector<int>> input = {{1,4},{0,2},{3,5}};
+    auto result = so.merge(input);
+    for (const auto& item : result)
+    {
+        SolutionTestUtil::myPrintVec(item);
+    }
+}
+
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "removeElement", "[removeElement]""[SortAndSearchTests]""[testlab]")
+{
+    vector<int> nums;
+    nums = {3,2,2,3};
+    auto result = so.removeElement(nums, 3);
+    REQUIRE(result == 2);
+    SolutionTestUtil::myPrintVec(nums);
+}
+
+TEST_CASE_METHOD(SortAndSearchTestsFixture, "characterReplacement", "[characterReplacement]""[SortAndSearchTests]""[testlab]")
+{
+    vector<int> nums;
+    nums = {4,5,6,7,0,1,2};
+    auto result = so.searchaaa(nums, 0);
+    REQUIRE(result == 4);
+
 }

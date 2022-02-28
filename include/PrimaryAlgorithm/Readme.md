@@ -14,6 +14,7 @@
 
 ## 深度优先
 [46. 全排列](https://leetcode-cn.com/problems/permutations/)
+[全排列 II]
 
 [剑指 Offer 26. 树的子结构](https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/)
 
